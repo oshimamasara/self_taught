@@ -1,20 +1,18 @@
-# Thanks so much for reading my book. Feel free to contact me at cory[at]theselftaughtprogrammer.io.
-
 
 from random import shuffle
 
 
 class Card:
-    suits = ["spades",
-             "hearts",
-             "diamonds",
-             "clubs"]
+    suits = ["♠",
+             "❤",
+             "♦",
+             "♣"]
 
     values = [None, None,"2", "3",
               "4", "5", "6", "7",
               "8", "9", "10",
-              "Jack", "Queen",
-              "King", "Ace"]
+              "ジャック(11)", "クイーン(12)",
+              "キング(13)", "エース(1)"]
 
     def __init__(self, v, s):
         """マークも値も整数値"""
@@ -42,9 +40,8 @@ class Card:
         return False
 
     def __repr__(self):
-        v = self.values[self.value] +\
-            " of " + \
-            self.suits[self.suit]
+        v = self.suits[self.suit] + " の " + self.values[self.value]
+#        v = self.values[self.value] + \ " of " + \ self.suits[self.suit]
         return v
 
 
@@ -80,7 +77,7 @@ class Game:
         self.p2 = Player(name2)
 
     def wins(self, winner):
-        w = "このラウンドは、 {} が勝ちました！"
+        w = "このラウンドは、 {} が勝ちました！\n"
         w = w.format(winner)
         print(w)
 
@@ -96,8 +93,8 @@ class Game:
         cards = self.deck.cards
         print("ゲームスタート！")
         while len(cards) >= 2:
-            m = "キーボードの q で終了 " + \
-                "それ以外のボタンでゲーム開始："
+            m = "（キーボードの q で終了）\n " + \
+                "何かキーボードを押して下さい："
             response = input(m)
             if response == 'q':
                 break
