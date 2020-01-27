@@ -17,7 +17,7 @@ class Card:
               "King", "Ace"]
 
     def __init__(self, v, s):
-        """suit + value are ints"""
+        """マークも値も整数値"""
         self.value = v
         self.suit = s
 
@@ -73,19 +73,19 @@ class Player:
 
 class Game:
     def __init__(self):
-        name1 = input("p1 name ")
-        name2 = input("p2 name ")
+        name1 = input("プレーヤー 1 の名前を入力してください： ")
+        name2 = input("プレーヤー 2 の名前を入力してください： ")
         self.deck = Deck()
         self.p1 = Player(name1)
         self.p2 = Player(name2)
 
     def wins(self, winner):
-        w = "{} wins this round"
+        w = "このラウンドは、 {} が勝ちました！"
         w = w.format(winner)
         print(w)
 
     def draw(self, p1n, p1c, p2n, p2c):
-        d = "{} drew {} {} drew {}"
+        d = "プレーヤー：{} は {}、 プレーヤー：{} は drew {} を引きました。"
         d = d.format(p1n,
                      p1c,
                      p2n,
@@ -94,10 +94,10 @@ class Game:
 
     def play_game(self):
         cards = self.deck.cards
-        print("beginning War!")
+        print("ゲームスタート！")
         while len(cards) >= 2:
-            m = "q to quit. Any " + \
-                "key to play:"
+            m = "キーボードの q で終了 " + \
+                "それ以外のボタンでゲーム開始："
             response = input(m)
             if response == 'q':
                 break
@@ -118,15 +118,14 @@ class Game:
 
         win = self.winner(self.p1,
                          self.p2)
-        print("War is over.{} wins"
-              .format(win))
+        print("勝者： {} ".format(win))
 
     def winner(self, p1, p2):
         if p1.wins > p2.wins:
             return p1.name
         if p1.wins < p2.wins:
             return p2.name
-        return "It was a tie!"
+        return "引き分け"
 
 game = Game()
 game.play_game()
